@@ -1,5 +1,5 @@
 {
-  "openrpc": "1.2.6",
+  "openrpc": "1.1.8",
   "info": {
     "version": "1.0.0",
     "title": "Secret Data Management API"
@@ -28,6 +28,7 @@
         {
           "name": "action",
           "description": "The action to be performed.",
+          "required": true,
           "schema": {
             "type": "string",
             "enum": [
@@ -40,6 +41,7 @@
         {
           "name": "dataID",
           "description": "Identifier for the data.",
+          "required": false,
           "schema": {
             "type": "string"
           }
@@ -57,6 +59,7 @@
         {
           "name": "accessLevel",
           "description": "Level of user access.",
+          "required": true,
           "schema": {
             "type": "string",
             "enum": [
@@ -108,7 +111,6 @@
       },
       "errors": [
         {
-          "name": "InvalidAction",
           "code": 100,
           "message": "Invalid action",
           "data": {
@@ -116,7 +118,6 @@
           }
         },
         {
-          "name": "InvalidDataID",
           "code": 101,
           "message": "Invalid dataID",
           "data": {
@@ -124,7 +125,6 @@
           }
         },
         {
-          "name": "UnauthorizedAccess",
           "code": 102,
           "message": "Unauthorized access",
           "data": {
@@ -135,35 +135,58 @@
       "examples": [
         {
           "name": "addDataExample",
-          "params": {
-            "name": "action",
-            "value": "add"
-          },
+          "params": [
+            {
+              "name": "action",
+              "value": "add"
+            },
+            {
+              "name": "language",
+              "value": "en-US"
+            }
+          ],
           "result": {
-            "name": "status",
-            "value": "success"
+            "name": "addDataExample",
+            "value": [
+              {
+                "status": "success"
+              }
+            ]
           }
         },
         {
           "name": "getDataExample",
-          "params": {
-            "name": "action",
-            "value": "get"
-          },
+          "params": [
+            {
+              "name": "action",
+              "value": "get"
+            }
+          ],
           "result": {
-            "name": "status",
-            "value": "success"
+            "name": "getDataExample",
+            "value": [
+              {
+                "status": "success",
+                "data": "Fri 17.01.2025"
+              }
+            ]
           }
         },
         {
           "name": "deleteDataExample",
-          "params": {
-            "name": "action",
-            "value": "delete"
-          },
+          "params": [
+            {
+              "name": "action",
+              "value": "delete"
+            }
+          ],
           "result": {
-            "name": "status",
-            "value": "success"
+            "name": "deleteDataExample",
+            "value": [
+              {
+                "status": "success"
+              }
+            ]
           }
         }
       ]
